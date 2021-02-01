@@ -1,0 +1,22 @@
+{
+  "name": "loicpoccard_7_01022021",
+  "version": "1.0.0",
+  "description": "Projet numéro 7 du parcours Développeur Front-End OpenClassrooms",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:CSS/main.css --style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poccardl/LoicPoccard_7_01022021.git"
+  },
+  "author": "Loïc POCCARD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Poccardl/LoicPoccard_7_01022021/issues"
+  },
+  "homepage": "https://github.com/Poccardl/LoicPoccard_7_01022021#readme",
+  "devDependencies": {
+    "eslint": "^7.19.0"
+  }
+}
