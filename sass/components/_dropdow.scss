@@ -1,0 +1,21 @@
+.custom-bg-primary {
+    .dropdown-item {
+        &:hover, &:focus {
+            @include bg-lighten($color-custom-primary);
+        }
+    }
+}
+.custom-bg-succes {
+    .dropdown-item {
+        &:hover, &:focus {
+            @include bg-lighten($color-custom-succes);
+        }
+    }
+}
+.custom-bg-danger {
+    .dropdown-item {
+        &:hover, &:focus {
+            @include bg-lighten($color-custom-danger);
+        }
+    }
+}

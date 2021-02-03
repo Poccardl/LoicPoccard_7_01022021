@@ -1,0 +1,29 @@
+@mixin custom-bg-primary {
+    background-color: $color-custom-primary!important;
+}
+@mixin custom-bg-succes {
+    background-color: $color-custom-succes!important;
+}
+@mixin custom-bg-danger {
+    background-color: $color-custom-danger!important;
+}
+@mixin custom-bg-light {
+    background-color: $color-custom-light!important;
+}
+
+.custom-bg-primary {
+    @include custom-bg-primary;
+}
+.custom-bg-succes {
+    @include custom-bg-succes;
+}
+.custom-bg-danger {
+    @include custom-bg-danger;
+}
+.custom-bg-light {
+    @include custom-bg-light;
+}
+
+@mixin bg-lighten($color) {
+    background-color: lighten($color, 5%)!important;
+}

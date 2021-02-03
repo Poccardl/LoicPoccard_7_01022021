@@ -6,6 +6,8 @@
     <meta name="description" content="Site de recettes de cuisine">
     <!-- Main CSS -->
     <link type="text/css" rel="stylesheet" href="CSS/main.css">
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- Mobile first option -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Font Awesome-->
@@ -16,6 +18,182 @@
     <title>Les petits plats | Acceuil</title>
 </head>
 <body>
-    
+    <header class="mt-5">
+        <svg width="52" height="47" viewBox="0 0 52 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M39.5083 25.3424V35.1415H12.4024V25.3424C7.99768 25.3424 4.60945 21.9635 4.60945 17.5708C4.60945 13.1781 7.99768 9.79908 12.4024 9.79908C15.4518 9.79908 18.1624 11.4886 19.5177 14.1918L22.9059 12.5023C21.8895 10.8128 20.873 9.12328 19.1789 8.10958C20.5342 5.74429 22.9059 4.05479 25.9553 4.05479C30.36 4.05479 33.7483 7.43378 33.7483 11.8265C33.7483 13.1781 33.4095 14.5297 32.7318 15.8813L36.12 17.9087C37.1365 16.2192 37.8142 14.1918 37.8142 11.8265C37.8142 11.1507 37.8142 10.8128 37.8142 10.137C38.4918 9.79908 39.1695 9.79908 39.8471 9.79908C44.2518 9.79908 47.64 13.1781 47.64 17.5708C47.64 21.9635 43.913 25.3424 39.5083 25.3424ZM39.5083 42.9132H12.4024V39.1963H39.5083V42.9132ZM39.5083 6.08219C38.4918 6.08219 37.4753 6.42009 36.12 6.42009C34.0871 2.70319 30.36 0 25.9553 0C21.5506 0 17.4847 2.36529 15.7906 6.42009C14.7742 6.08219 13.7577 6.08219 12.4024 6.08219C5.96474 6.08219 0.882385 11.1507 0.882385 17.5708C0.882385 22.6393 4.27062 27.0319 8.67533 28.3835V46.2922H43.5742V28.7214C47.9789 27.0319 51.3671 22.9772 51.3671 17.9087C51.3671 11.4886 45.9459 6.08219 39.5083 6.08219ZM22.2283 31.0867H18.5012V23.653H22.2283V31.0867ZM33.7483 31.0867H30.0212V23.653H33.7483V31.0867Z" fill="#D04F4F"/>
+        </svg>
+        <h1>Les petits plats</h1>
+    </header>
+    <main class="container">
+        <nav class="navbar navbar-light">
+          <!-- Search bar -->
+          <div class="col-xl-12">
+            <form class="container-fluid">
+              <div class="input-group">
+                <input type="text" class="form-control custom-bg-light b_none" placeholder="Rechercher un ingrédient, un appareil, ustensiles ou une recette" aria-label="search" aria-describedby="basic-addon1">
+                <span class="input-group-text custom-bg-light b_none" id="basic-addon1"><i class="fas fa-search"></i></span>
+              </div>
+            </form>
+          </div>
+          <div class="row mt-2">
+            <!-- Ingrédients -->
+            <div class="col-xl-3">
+              <div class="input-group">
+                <input type="text" class="form-control text-light custom-bg-primary white_placeholder b_none" placeholder="Ingrédients" aria-label="Text input with segmented dropdown button">
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split text-light custom-bg-primary b_none" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end custom-bg-primary">
+                  <li><a class="dropdown-item text-light" href="#">Action</a></li>
+                  <li><a class="dropdown-item text-light" href="#">Another action</a></li>
+                  <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item text-light" href="#">Separated link</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- Appareil -->
+            <div class="col-xl-3">
+              <div class="input-group">
+                <input type="text" class="form-control text-light custom-bg-succes white_placeholder b_none" placeholder="Appareil" aria-label="Text input with segmented dropdown button">
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split text-light custom-bg-succes b_none" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end custom-bg-succes">
+                  <li><a class="dropdown-item text-light" href="#">Action</a></li>
+                  <li><a class="dropdown-item text-light" href="#">Another action</a></li>
+                  <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item text-light" href="#">Separated link</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- Ustensiles -->
+            <div class="col-xl-3">
+              <div class="input-group">
+                <input type="text" class="form-control text-light custom-bg-danger white_placeholder b_none" placeholder="Ustensiles" aria-label="Text input with segmented dropdown button">
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split text-light custom-bg-danger b_none" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end custom-bg-danger">
+                  <li><a class="dropdown-item text-light" href="#">Action</a></li>
+                  <li><a class="dropdown-item text-light" href="#">Another action</a></li>
+                  <li><a class="dropdown-item text-light" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item text-light" href="#">Separated link</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <section>
+          <!-- Recettes -->
+            <div class="row">
+                <div class="col-xl-4 mt-4">
+                  <div class="card">
+                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <div class="card_header">
+                        <h5 class="card-title">Limonade de Coco</h5>
+                        <span class="time">
+                          <i class="far fa-clock"></i>
+                          <p><b>&#160;10 min</b></p>
+                        </span>
+                      </div>
+                      <div class="card_content">
+                        <ul class="element">
+                          <li><b>Lait de coco:</b> 400ml</li>
+                          <li><b>Jus de citron:</b> 2</li>
+                          <li><b>Créme de cocà:</b> 4 cuillères</li>
+                          <li><b>Sucre:</b> 20g</li>
+                          <li><b>Glaçons:</b> 2</li>
+                        </ul>
+                        <p class="card-text element">Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 mt-4">
+                  <div class="card">
+                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 mt-4">
+                  <div class="card">
+                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 mt-4">
+                  <div class="card">
+                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 mt-4">
+                  <div class="card">
+                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 mt-4">
+                  <div class="card">
+                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 mt-4">
+                  <div class="card">
+                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 mt-4">
+                  <div class="card">
+                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 mt-4">
+                  <div class="card">
+                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4 mt-4">
+                  <div class="card">
+                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>

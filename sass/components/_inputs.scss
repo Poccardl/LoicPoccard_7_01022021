@@ -1,0 +1,8 @@
+.b_none {
+    border: none!important;
+}
+.white_placeholder {
+    &::placeholder {
+        color: white!important;
+    }
+}

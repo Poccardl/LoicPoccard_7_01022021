@@ -1,0 +1,22 @@
+.card-body {
+    background-color: $color-custom-light;
+}
+.card_header {
+    display: flex;
+    justify-content: space-between;
+    .time {
+        display: flex;
+        i {
+            padding-top: 5%;
+            margin-bottom: 16px;
+        }
+    }
+}
+.card_content {
+    display: flex;
+    font-size: 12px;
+    .element {
+        margin: 4px;
+        width: 50%;
+    }
+}
