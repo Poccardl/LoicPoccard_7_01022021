@@ -1,3 +1,21 @@
+#ingredients {
+    display: flex;
+}
+#appareil {
+    display: none;
+}
+#ustensiles {
+    display: none;
+}
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0px 0px 5px 5px!important;
+    li {
+        padding: 2.5px 0px 2.5px 12px;
+        width: 33.33%;
+    }
+}
 .custom-bg-primary {
     .dropdown-item {
         &:hover, &:focus {
