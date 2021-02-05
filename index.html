@@ -30,7 +30,7 @@
           <div class="col-xl-12">
             <form class="container-fluid">
               <div class="input-group">
-                <input type="text" class="form-control custom-bg-light b_none" placeholder="Rechercher un ingrédient, un appareil, ustensiles ou une recette" aria-label="search" aria-describedby="basic-addon1">
+                <input type="text" id="search_bar" class="form-control custom-bg-light b_none" placeholder="Rechercher un ingrédient, un appareil, ustensiles ou une recette" aria-label="search" aria-describedby="basic-addon1">
                 <span class="input-group-text custom-bg-light b_none" id="basic-addon1"><i class="fas fa-search"></i></span>
               </div>
             </form>
@@ -137,115 +137,9 @@
             </div>
           </div>
         </nav>
-        <section>
+        <section id="recipes_section">
           <!-- Recettes -->
-            <div class="row">
-                <div class="col-xl-4 mt-4">
-                  <div class="card">
-                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <div class="card_header">
-                        <h5 class="card-title">Limonade de Coco</h5>
-                        <span class="time">
-                          <i class="far fa-clock"></i>
-                          <b>&#160;10 min</b>
-                        </span>
-                      </div>
-                      <div class="card_content">
-                        <ul class="element">
-                          <li><b>Lait de coco:</b> 400ml</li>
-                          <li><b>Jus de citron:</b> 2</li>
-                          <li><b>Créme de cocà:</b> 4 cuillères</li>
-                          <li><b>Sucre:</b> 20g</li>
-                          <li><b>Glaçons:</b> 2</li>
-                        </ul>
-                        <p class="card-text element">Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 mt-4">
-                  <div class="card">
-                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 mt-4">
-                  <div class="card">
-                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 mt-4">
-                  <div class="card">
-                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 mt-4">
-                  <div class="card">
-                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 mt-4">
-                  <div class="card">
-                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 mt-4">
-                  <div class="card">
-                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 mt-4">
-                  <div class="card">
-                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 mt-4">
-                  <div class="card">
-                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 mt-4">
-                  <div class="card">
-                    <img src="img/recette_proto.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div class="row"></div>
         </section>
     </main>
     <!-- Main scrips -->
