@@ -19,4 +19,12 @@
         margin: 4px;
         width: 50%;
     }
+    .card-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        max-height: 125px;
+        -webkit-line-clamp: 7; /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
 }

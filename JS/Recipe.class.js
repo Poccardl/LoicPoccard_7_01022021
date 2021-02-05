@@ -32,7 +32,7 @@ export default class Recipe {
             let ingredients = data[element]["ingredients"]
             let recipe_ingredients_html = ""
             for (let i in ingredients) {
-                recipe_ingredients_html += `<li><b>${ingredients[i]["ingredient"]}</b>:`
+                recipe_ingredients_html += `<li><b>${ingredients[i]["ingredient"]}</b>: `
                 if (ingredients[i]["quantity"]) {
                     recipe_ingredients_html += ingredients[i]["quantity"]
                 }
