@@ -1,18 +1,8 @@
 // imports
 import Recipe from "./Recipe.class.js"
+import Toolbox from "./Toolbox.class.js"
 
 fetchData()
-
-// DOM Elements
-const search_bar = document.getElementById("search_bar")
-
-// Events
-search_bar.addEventListener("input", (e) => {
-    let search_value = e.target.value
-    if (search_value.length >= 3) {
-        //lance la recherche à partir de 3 caractère
-    }
-})
 
 function fetchData() {
     /* TODO: add commentaire */
@@ -26,6 +16,25 @@ function fetchData() {
             let recipe_obj = new Recipe(data["recipes"][element])
             recipes_obj_list.push(recipe_obj)
         }
-        Recipe.insertAllRecipe(recipes_obj_list)
+        let recipes = Recipe.createRecipeObjList(recipes_obj_list)
+        scenario(recipes)
+    })
+}
+
+function scenario(recipes) {
+    /* TODO: add commentaire */
+    console.log("recipes", recipes)
+    Toolbox.insertAllRecipe(recipes)
+
+    // DOM Elements
+    const search_bar = document.getElementById("search_bar")
+
+    // Events
+    search_bar.addEventListener("input", (e) => {
+        let search_value = e.target.value
+        //lance la recherche à partir de 3 caractère
+        if (search_value.length >= 3) {
+            Toolbox.sortRecipe(recipes, search_value)
+        }
     })
 }
