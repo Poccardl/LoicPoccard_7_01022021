@@ -23,7 +23,6 @@ function fetchData() {
 
 function scenario(recipes) {
     /* TODO: add commentaire */
-    console.log("recipes", recipes)
     Toolbox.insertAllRecipe(recipes)
 
     // DOM Elements
@@ -34,7 +33,7 @@ function scenario(recipes) {
         let search_value = e.target.value
         //lance la recherche à partir de 3 caractère
         if (search_value.length >= 3) {
-            Toolbox.sortRecipe(recipes, search_value)
+            Toolbox.sortRecipe(recipes, search_value.toLowerCase())
         }
     })
 }

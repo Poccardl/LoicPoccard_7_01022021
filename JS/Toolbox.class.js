@@ -55,5 +55,36 @@ export default class Toolbox {
         /* TODO: add commentaire */
         console.log("data", recipes)
         console.log("search_value", search_value)
+        recipes = recipes["recipes"]
+        const regex_search = RegExp(`(\\b${search_value}\\b)`)
+        let sorted_recipes = []
+
+        for (let element in recipes) {
+            let name = recipes[element]["name"].toLowerCase()
+            let description = recipes[element]["description"].toLowerCase()
+            let ingredients = recipes[element]["ingredients"]
+            // cherche si on a une correspondance dans le titre de la recette
+            if (regex_search.exec(name)) {
+                console.log("match name :", recipes[element]["name"])
+                sorted_recipes.push(recipes[element])
+                continue
+            }
+            // cherche si on a une correspondance dans la description de la recette
+            if (regex_search.exec(description)) {
+                console.log("match description :", recipes[element]["description"])
+                sorted_recipes.push(recipes[element])
+                continue
+            }
+            // cherche si on a une correspondance dans les ingrédients de la recette
+            for (let i in ingredients) {
+                let ingredient = ingredients[i]["ingredient"].toLowerCase()
+                if (regex_search.exec(ingredient)) {
+                    console.log("match ingredient :", ingredients[i]["ingredient"])
+                    sorted_recipes.push(recipes[element])
+                    continue
+                }
+            }
+        }
+        console.log("sorted_recipes", sorted_recipes)
     }
 }
