@@ -85,6 +85,78 @@ export default class Toolbox {
                 }
             }
         }
-        console.log("sorted_recipes", sorted_recipes)
+        if (sorted_recipes.length > 0) {
+            this.sortTagRecipe(sorted_recipes)
+        }
+    }
+
+    static sortTagRecipe(sorted_recipes) {
+        /* TODO: add commentaire */
+        this.insertSortRecipe(sorted_recipes)
+    }
+
+    static insertSortRecipe(sorted_recipes) {
+        /* TODO: add commentaire */
+        // supprime les cartes existantes avant d'ajouter les nouvelles
+        this.removeRecipe()
+        const recipes_section = document.querySelector("#recipes_section .row")
+        let recipe_cards = []
+        for (let element in sorted_recipes) {
+            let recipe_card_html = `<div class="col-xl-4 mt-4">
+            <div class="card">
+            <img src="img/recette_proto.png" class="card-img-top" alt="image test">
+            <div class="card-body">
+            <div class="card_header">
+            <h5 class="card-title">${sorted_recipes[element]["name"]}</h5>
+            <span class="time">
+            <i class="far fa-clock"></i>
+            <b>&#160;${sorted_recipes[element]["time"]} min</b>
+            </span>
+            </div>
+            <div class="card_content">
+            <ul class="element">
+            `
+            let ingredients = sorted_recipes[element]["ingredients"]
+            let recipe_ingredients_html = ""
+            for (let i in ingredients) {
+                recipe_ingredients_html += `<li><b>${ingredients[i]["ingredient"]}</b>: `
+                if (ingredients[i]["quantity"]) {
+                    recipe_ingredients_html += ingredients[i]["quantity"]
+                }
+                if (ingredients[i]["unit"]) {
+                    recipe_ingredients_html += ingredients[i]["unit"]
+                }
+                else {
+                    continue
+                }
+                recipe_ingredients_html += `</li>`
+
+            }
+            recipe_card_html += `${recipe_ingredients_html}
+            </ul>
+            <p class="card-text element">${sorted_recipes[element]["description"]}</p>
+            </div>
+            </div>
+            </div>
+            </div>
+            `
+            recipe_cards.push(recipe_card_html)
+        }
+        for (let element in recipe_cards) {
+            recipes_section.insertAdjacentHTML("beforeend", recipe_cards[element]);
+        }
+    }
+
+    static removeRecipe() {
+        /* TODO: add commentaire */
+        try {
+            const recipe_cards = document.querySelectorAll("#recipes_section .row .col-xl-4")
+            for (let element in recipe_cards) {
+                recipe_cards[element].remove()
+            }
+        }
+        catch {
+            //TODO: add error
+        }
     }
 }
