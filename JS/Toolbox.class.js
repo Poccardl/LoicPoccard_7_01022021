@@ -1,7 +1,7 @@
 export default class Toolbox {
 
     static insertAllRecipe(recipes) {
-        /* TODO: add commentaire */
+        /* Ajoute la totalité des recettes de l'application */
         const recipes_section = document.querySelector("#recipes_section .row")
         let data = recipes["recipes"]
         let recipe_cards = []
@@ -52,13 +52,10 @@ export default class Toolbox {
     }
 
     static sortRecipe(recipes, search_value) {
-        /* TODO: add commentaire */
-        console.log("data", recipes)
-        console.log("search_value", search_value)
+        /* Tri les recettes en fonction de la recherche de l'utilisateur */
         recipes = recipes["recipes"]
-        const regex_search = RegExp(`(\\b${search_value}\\b)`)
+        const regex_search = RegExp(`(\\b${search_value})`)
         let sorted_recipes = []
-
         for (let element in recipes) {
             let name = recipes[element]["name"].toLowerCase()
             let description = recipes[element]["description"].toLowerCase()
@@ -85,9 +82,33 @@ export default class Toolbox {
                 }
             }
         }
+        // supprime l'alert si déjà présente pour éviter les doublons ou en cas de recherche valide
+        try {
+            const recipe_alert = document.querySelector("#recipes_section .row .alert")
+            recipe_alert.remove()
+        }
+        catch {
+            console.info("code : sortRecipe()")
+        }
         if (sorted_recipes.length > 0) {
             this.sortTagRecipe(sorted_recipes)
         }
+        else {
+            // supprime les cartes existantes
+            this.removeRecipe()
+            // ajout du message "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc..."
+            this.incorrectSorting()
+        }
+    }
+
+    static incorrectSorting() {
+        /* Ajoute une alert */
+        const recipes_section = document.querySelector("#recipes_section .row")
+        let incorrect_message_html = `<div class="alert alert-danger" role="alert">
+        Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc...
+        </div>
+        `
+        recipes_section.insertAdjacentHTML("beforeend", incorrect_message_html)
     }
 
     static sortTagRecipe(sorted_recipes) {
@@ -96,7 +117,7 @@ export default class Toolbox {
     }
 
     static insertSortRecipe(sorted_recipes) {
-        /* TODO: add commentaire */
+        /* Ajoute les recettes correspondantes à la recherche */
         // supprime les cartes existantes avant d'ajouter les nouvelles
         this.removeRecipe()
         const recipes_section = document.querySelector("#recipes_section .row")
@@ -148,7 +169,7 @@ export default class Toolbox {
     }
 
     static removeRecipe() {
-        /* TODO: add commentaire */
+        /* Supprime les recettes */
         try {
             const recipe_cards = document.querySelectorAll("#recipes_section .row .col-xl-4")
             for (let element in recipe_cards) {
@@ -156,7 +177,7 @@ export default class Toolbox {
             }
         }
         catch {
-            //TODO: add error
+            console.info("code : removeRecipe()")
         }
     }
 }

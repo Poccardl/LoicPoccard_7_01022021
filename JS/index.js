@@ -5,7 +5,7 @@ import Toolbox from "./Toolbox.class.js"
 fetchData()
 
 function fetchData() {
-    /* TODO: add commentaire */
+    /* Récupère les données des différentes recettes dans le fichier "recipes.json" */
     fetch("data/recipes.json")
     .then(function(resp) {
         return resp.json()
