@@ -102,13 +102,75 @@ export default class Toolbox {
     }
 
     static incorrectSorting() {
-        /* Ajoute une alert */
+        /* Ajoute une alerte */
         const recipes_section = document.querySelector("#recipes_section .row")
         let incorrect_message_html = `<div class="alert alert-danger" role="alert">
         Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc...
         </div>
         `
         recipes_section.insertAdjacentHTML("beforeend", incorrect_message_html)
+    }
+
+    static getAllTag(recipes) {
+        /* Récupère tous les tags disponibles */
+        let data = recipes["recipes"]
+        let appliance_tags = []
+        let ingredient_tags = []
+        let ustensils_tags = []
+        for (let element in data) {
+            // répuère les tags de type appliance
+            if (appliance_tags.includes(data[element].appliance)) {
+                continue
+            }
+            else {
+                appliance_tags.push(data[element].appliance)
+            }
+            // répuère les tags de type ingredient
+            for (let i in data[element].ingredients) {
+                if (ingredient_tags.includes(data[element].ingredients[i].ingredient)) {
+                    continue
+                }
+                else {
+                    ingredient_tags.push(data[element].ingredients[i].ingredient)
+                }
+            }
+            // répuère les tags de type ustensil
+            for (let a in data[element].ustensils) {
+                if (ustensils_tags.includes(data[element].ustensils[a])) {
+                    continue
+                }
+                else {
+                    ustensils_tags.push(data[element].ustensils[a])
+                }
+
+            }
+        }
+        this.insertAllTag(appliance_tags, ingredient_tags, ustensils_tags)
+    }
+
+    static insertAllTag(appliance_tags, ingredient_tags, ustensils_tags) {
+        /* Ajoute la totalité des tags de l'application */
+        const appareil_ul = document.getElementById("appareil")
+        const ingredients_ul = document.getElementById("ingredients")
+        const ustensiles_ul = document.getElementById("ustensiles")
+        let appliance_tags_html = ""
+        let ingredient_tags_html = ""
+        let ustensils_tags_html = ""
+        for (let element in appliance_tags) {
+            let tag_html = `<li><a class="text-light" href="#">${appliance_tags[element]}</a></li>`
+            appliance_tags_html += tag_html
+        }
+        for (let element in ingredient_tags) {
+            let tag_html = `<li><a class="text-light" href="#">${ingredient_tags[element]}</a></li>`
+            ingredient_tags_html += tag_html
+        }
+        for (let element in ustensils_tags) {
+            let tag_html = `<li><a class="text-light" href="#">${ustensils_tags[element]}</a></li>`
+            ustensils_tags_html += tag_html
+        }
+        appareil_ul.insertAdjacentHTML("beforeend", appliance_tags_html);
+        ingredients_ul.insertAdjacentHTML("beforeend", ingredient_tags_html);
+        ustensiles_ul.insertAdjacentHTML("beforeend", ustensils_tags_html);
     }
 
     static sortTagRecipe(sorted_recipes) {

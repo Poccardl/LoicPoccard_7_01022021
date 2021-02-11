@@ -5,7 +5,7 @@
         "servings": 1,
         "ingredients": [
             {
-                "ingredient": "Lait de coco",
+                "ingredient": "Lait de Coco",
                 "quantity": 400,
                 "unit": "ml"
             },
@@ -79,7 +79,7 @@
                 "quantity": 1
             },
             {
-                "ingredient": "Lait de coco",
+                "ingredient": "Lait de Coco",
                 "quantity": 400,
                 "unit": "ml"
             },
@@ -167,7 +167,7 @@
                 "unit": "cuillères à soupe"
             },
             {
-                "ingredient": "gruyère râpé",
+                "ingredient": "Gruyère râpé",
                 "quantity": 100,
                 "unit": "grammes"
             },
@@ -456,7 +456,7 @@
                 "unit": "cuillère à soupe"
             },
             {
-                "ingredient": "huile d'olive",
+                "ingredient": "Huile d'olive",
                 "quantity": 2,
                 "unit": "cuillère à soupe"
             }
@@ -697,7 +697,7 @@
                 "unit": "grammes"
             },
             {
-                "ingredient": "huile d'olive",
+                "ingredient": "Huile d'olive",
                 "quantity": 1,
                 "unit": "cuillères à soupe"
             }
@@ -727,7 +727,7 @@
                 "unit": "grammes"
             },
             {
-                "ingredient": "Viande hachée 1% de matière grasse",
+                "ingredient": "Viande hachée",
                 "quantity": 400,
                 "unit": "grammes"
             },
