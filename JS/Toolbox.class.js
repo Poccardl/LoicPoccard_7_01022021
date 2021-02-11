@@ -1,6 +1,6 @@
 export default class Toolbox {
 
-    static insertAllRecipe(recipes) {
+    static insertAllRecipes(recipes) {
         /* Ajoute la totalité des recettes de l'application */
         const recipes_section = document.querySelector("#recipes_section .row")
         let data = recipes["recipes"]
@@ -62,13 +62,11 @@ export default class Toolbox {
             let ingredients = recipes[element]["ingredients"]
             // cherche si on a une correspondance dans le titre de la recette
             if (regex_search.exec(name)) {
-                console.log("match name :", recipes[element]["name"])
                 sorted_recipes.push(recipes[element])
                 continue
             }
             // cherche si on a une correspondance dans la description de la recette
             if (regex_search.exec(description)) {
-                console.log("match description :", recipes[element]["description"])
                 sorted_recipes.push(recipes[element])
                 continue
             }
@@ -76,7 +74,6 @@ export default class Toolbox {
             for (let i in ingredients) {
                 let ingredient = ingredients[i]["ingredient"].toLowerCase()
                 if (regex_search.exec(ingredient)) {
-                    console.log("match ingredient :", ingredients[i]["ingredient"])
                     sorted_recipes.push(recipes[element])
                     continue
                 }
@@ -91,11 +88,18 @@ export default class Toolbox {
             console.info("code : sortRecipe()")
         }
         if (sorted_recipes.length > 0) {
-            this.sortTagRecipe(sorted_recipes)
+            // TODO: add commentaire
+            this.sortTagRecipe(sorted_recipes) // TODO: peut être l'appeler à un autre moment et call directement this.insertSortRecipe(sorted_recipes) ?
+            // supprime les tags existants
+            this.removeTags()
+            // récupère les tags en fonction de la recherche en cours
+            this.getTags(sorted_recipes)
         }
         else {
             // supprime les cartes existantes
             this.removeRecipe()
+            // supprime les tags existants
+            this.removeTags()
             // ajout du message "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc..."
             this.incorrectSorting()
         }
@@ -111,7 +115,7 @@ export default class Toolbox {
         recipes_section.insertAdjacentHTML("beforeend", incorrect_message_html)
     }
 
-    static getAllTag(recipes) {
+    static getAllTags(recipes) {
         /* Récupère tous les tags disponibles */
         let data = recipes["recipes"]
         let appliance_tags = []
@@ -142,13 +146,47 @@ export default class Toolbox {
                 else {
                     ustensils_tags.push(data[element].ustensils[a])
                 }
-
             }
         }
-        this.insertAllTag(appliance_tags, ingredient_tags, ustensils_tags)
+        this.insertTags(appliance_tags, ingredient_tags, ustensils_tags)
     }
 
-    static insertAllTag(appliance_tags, ingredient_tags, ustensils_tags) {
+    static getTags(sorted_recipes) {
+        /* TODO: add commentaire */
+        let appliance_tags = []
+        let ingredient_tags = []
+        let ustensils_tags = []
+        for (let element in sorted_recipes) {
+            // répuère les tags de type appliance
+            if (appliance_tags.includes(sorted_recipes[element].appliance)) {
+                continue
+            }
+            else {
+                appliance_tags.push(sorted_recipes[element].appliance)
+            }
+            // répuère les tags de type ingredient
+            for (let i in sorted_recipes[element].ingredients) {
+                if (ingredient_tags.includes(sorted_recipes[element].ingredients[i].ingredient)) {
+                    continue
+                }
+                else {
+                    ingredient_tags.push(sorted_recipes[element].ingredients[i].ingredient)
+                }
+            }
+            // répuère les tags de type ustensil
+            for (let a in sorted_recipes[element].ustensils) {
+                if (ustensils_tags.includes(sorted_recipes[element].ustensils[a])) {
+                    continue
+                }
+                else {
+                    ustensils_tags.push(sorted_recipes[element].ustensils[a])
+                }
+            }
+        }
+        this.insertTags(appliance_tags, ingredient_tags, ustensils_tags)
+    }
+
+    static insertTags(appliance_tags, ingredient_tags, ustensils_tags) {
         /* Ajoute la totalité des tags de l'application */
         const appareil_ul = document.getElementById("appareil")
         const ingredients_ul = document.getElementById("ingredients")
@@ -240,6 +278,20 @@ export default class Toolbox {
         }
         catch {
             console.info("code : removeRecipe()")
+        }
+    }
+
+    static removeTags() {
+        /* Supprime les tags */
+        console.log("On passe bien dans remove tags!!")
+        try {
+            const filters = document.querySelectorAll(".filters li")
+            for (let element in filters) {
+                filters[element].remove()
+            }
+        }
+        catch {
+            console.info("code : removeTags()")
         }
     }
 }

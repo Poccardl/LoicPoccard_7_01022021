@@ -23,8 +23,8 @@ function fetchData() {
 
 function scenario(recipes) {
     /* TODO: add commentaire */
-    Toolbox.insertAllRecipe(recipes)
-    Toolbox.getAllTag(recipes)
+    Toolbox.insertAllRecipes(recipes)
+    Toolbox.getAllTags(recipes)
 
     // DOM Elements
     const search_bar = document.getElementById("search_bar")
