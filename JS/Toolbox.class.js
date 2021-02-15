@@ -195,15 +195,15 @@ export default class Toolbox {
         let ingredient_tags_html = ""
         let ustensils_tags_html = ""
         for (let element in appliance_tags) {
-            let tag_html = `<li><a class="text-light" href="#">${appliance_tags[element]}</a></li>`
+            let tag_html = `<li><a class="dropdown-item text-light" href="#">${appliance_tags[element]}</a></li>`
             appliance_tags_html += tag_html
         }
         for (let element in ingredient_tags) {
-            let tag_html = `<li><a class="text-light" href="#">${ingredient_tags[element]}</a></li>`
+            let tag_html = `<li><a class="dropdown-item text-light" href="#">${ingredient_tags[element]}</a></li>`
             ingredient_tags_html += tag_html
         }
         for (let element in ustensils_tags) {
-            let tag_html = `<li><a class="text-light" href="#">${ustensils_tags[element]}</a></li>`
+            let tag_html = `<li><a class="dropdown-item text-light" href="#">${ustensils_tags[element]}</a></li>`
             ustensils_tags_html += tag_html
         }
         ingredients_ul.insertAdjacentHTML("beforeend", ingredient_tags_html);
@@ -239,7 +239,7 @@ export default class Toolbox {
         // récupère le bon node en fonction du type de tag
         const tags_ul = document.getElementById(`${node}`)
         for (let element in sorted_tags) {
-            current_tags_html += `<li><a class="text-light" href="#">${sorted_tags[element]}</a></li>`
+            current_tags_html += `<li><a class="dropdown-item text-light" href="#">${sorted_tags[element]}</a></li>`
         }
         // supprime les anciens tags avant d'ajouter les nouveaux
         this.removeCurrentTags(node)
@@ -372,5 +372,23 @@ export default class Toolbox {
             }
         }
 
+    }
+
+    static activeDropdown(type, btn) {
+        /* TODO: add commentaire */
+        let active_class = "col-xl-6"
+        let inactive_class = "col-xl-2"
+        const dropdown = document.getElementById(`${type}_section`)
+        const tags_ul = document.getElementById(`${type}`)
+        if (dropdown.className == inactive_class) {
+            dropdown.setAttribute("class", active_class)
+            tags_ul.style.display = "flex"
+            btn.innerHTML = `<i class="fas fa-chevron-up"></i>`
+        }
+        else if (dropdown.className == active_class) {
+            dropdown.setAttribute("class", inactive_class)
+            tags_ul.style.display = "none"
+            btn.innerHTML = `<i class="fas fa-chevron-down"></i>`
+        }
     }
 }

@@ -37,6 +37,9 @@ function scenario(recipes) {
     const search_ingredients = document.getElementById("search_ingredients")
     const search_appareil = document.getElementById("search_appareil")
     const search_ustensiles = document.getElementById("search_ustensiles")
+    const ingredients_btn = document.getElementById("ingredients_btn")
+    const appareil_btn = document.getElementById("appareil_btn")
+    const ustensiles_btn = document.getElementById("ustensiles_btn")
 
     // events
     search_bar.addEventListener("input", (e) => {
@@ -52,17 +55,22 @@ function scenario(recipes) {
     })
     // TODO: add commentaire
     search_ingredients.addEventListener("input", (e) => {
-        let search_value = e.target.value
-        Toolbox.sortTags("ingredient", search_value.toLowerCase(), current_ingredient_tags)
+        Toolbox.sortTags("ingredient", e.target.value.toLowerCase(), current_ingredient_tags)
     })
-    // TODO: add commentaire
     search_appareil.addEventListener("input", (e) => {
-        let search_value = e.target.value
-        Toolbox.sortTags("appliance", search_value.toLowerCase(), current_appliancet_ags)
+        Toolbox.sortTags("appliance", e.target.value.toLowerCase(), current_appliancet_ags)
+    })
+    search_ustensiles.addEventListener("input", (e) => {
+        Toolbox.sortTags("ustensil", e.target.value.toLowerCase(), current_ustensil_tags)
     })
     // TODO: add commentaire
-    search_ustensiles.addEventListener("input", (e) => {
-        let search_value = e.target.value
-        Toolbox.sortTags("ustensil", search_value.toLowerCase(), current_ustensil_tags)
+    ingredients_btn.addEventListener("click", () => {
+        Toolbox.activeDropdown("ingredients", ingredients_btn)
+    })
+    appareil_btn.addEventListener("click", () => {
+        Toolbox.activeDropdown("appareil", appareil_btn)
+    })
+    ustensiles_btn.addEventListener("click", () => {
+        Toolbox.activeDropdown("ustensiles", ustensiles_btn)
     })
 }
