@@ -89,7 +89,7 @@ export default class Toolbox {
         }
         if (sorted_recipes.length > 0) {
             // TODO: add commentaire
-            this.sortTagRecipe(sorted_recipes) // TODO: peut être l'appeler à un autre moment et call directement this.insertSortRecipe(sorted_recipes) ?
+            this.insertSortRecipe(sorted_recipes)
             // supprime les tags existants
             this.removeTags()
             // récupère les tags en fonction de la recherche en cours
@@ -206,14 +206,61 @@ export default class Toolbox {
             let tag_html = `<li><a class="text-light" href="#">${ustensils_tags[element]}</a></li>`
             ustensils_tags_html += tag_html
         }
-        appareil_ul.insertAdjacentHTML("beforeend", appliance_tags_html);
         ingredients_ul.insertAdjacentHTML("beforeend", ingredient_tags_html);
+        appareil_ul.insertAdjacentHTML("beforeend", appliance_tags_html);
         ustensiles_ul.insertAdjacentHTML("beforeend", ustensils_tags_html);
     }
 
-    static sortTagRecipe(sorted_recipes) {
+    static sortTags(type, search_value) {
         /* TODO: add commentaire */
-        this.insertSortRecipe(sorted_recipes)
+        const regex_tags = RegExp(">(...{0,})<")
+        let current_tags = []
+        if (type == "ingredient") {
+            current_tags = this.getCurrentIngredientTags(regex_tags)
+        }
+        else if (type == "appliance") {
+            current_tags = this.getCurrentApplianceTags(regex_tags)
+        }
+        else if (type == "ustensil") {
+            current_tags = this.getCurrentUstensilTags(regex_tags)
+        }
+        console.log("current_tags :", current_tags)
+    }
+
+    static getCurrentIngredientTags(regex_tags) {
+        /* TODO: add commentaire */
+        const ingredients_li = document.querySelectorAll("#ingredients li")
+        let current_ingredient = []
+        for (let element in ingredients_li) {
+            if (ingredients_li[element].innerHTML != undefined) {
+                current_ingredient.push(regex_tags.exec(ingredients_li[element].innerHTML)[1])
+            }
+        }
+        return current_ingredient
+    }
+
+    static getCurrentApplianceTags(regex_tags) {
+        /* TODO: add commentaire */
+        const appliance_li = document.querySelectorAll("#appareil li")
+        let current_appliance = []
+        for (let element in appliance_li) {
+            if (appliance_li[element].innerHTML != undefined) {
+                current_appliance.push(regex_tags.exec(appliance_li[element].innerHTML)[1])
+            }
+        }
+        return current_appliance
+    }
+
+    static getCurrentUstensilTags(regex_tags) {
+        /* TODO: add commentaire */
+        const ustensils_li = document.querySelectorAll("#ustensiles li")
+        let current_ustensil = []
+        for (let element in ustensils_li) {
+            if (ustensils_li[element].innerHTML != undefined) {
+                current_ustensil.push(regex_tags.exec(ustensils_li[element].innerHTML)[1])
+            }
+        }
+        return current_ustensil
     }
 
     static insertSortRecipe(sorted_recipes) {

@@ -28,13 +28,31 @@ function scenario(recipes) {
 
     // DOM Elements
     const search_bar = document.getElementById("search_bar")
+    const search_ingredients = document.getElementById("search_ingredients")
+    const search_appareil = document.getElementById("search_appareil")
+    const search_ustensiles = document.getElementById("search_ustensiles")
 
     // Events
     search_bar.addEventListener("input", (e) => {
         let search_value = e.target.value
-        //lance la recherche à partir de 3 caractère
+        // lance la recherche à partir de 3 caractère
         if (search_value.length >= 3) {
             Toolbox.sortRecipe(recipes, search_value.toLowerCase())
         }
+    })
+    // TODO: add commentaire
+    search_ingredients.addEventListener("input", (e) => {
+        let search_value = e.target.value
+        Toolbox.sortTags("ingredient", search_value.toLowerCase())
+    })
+    // TODO: add commentaire
+    search_appareil.addEventListener("input", (e) => {
+        let search_value = e.target.value
+        Toolbox.sortTags("appliance", search_value.toLowerCase())
+    })
+    // TODO: add commentaire
+    search_ustensiles.addEventListener("input", (e) => {
+        let search_value = e.target.value
+        Toolbox.sortTags("ustensil", search_value.toLowerCase())
     })
 }
