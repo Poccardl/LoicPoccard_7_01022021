@@ -116,20 +116,20 @@ export default class Toolbox {
     }
 
     static getAllTags(recipes) {
-        /* Récupère tous les tags disponibles */
+        /* Récupère tous les tags disponibles lors de la première initialisation de l'application */
         let data = recipes["recipes"]
         let appliance_tags = []
         let ingredient_tags = []
         let ustensils_tags = []
         for (let element in data) {
-            // répuère les tags de type appliance
+            // récupère les tags de type appliance
             if (appliance_tags.includes(data[element].appliance)) {
                 continue
             }
             else {
                 appliance_tags.push(data[element].appliance)
             }
-            // répuère les tags de type ingredient
+            // récupère les tags de type ingredient
             for (let i in data[element].ingredients) {
                 if (ingredient_tags.includes(data[element].ingredients[i].ingredient)) {
                     continue
@@ -138,7 +138,7 @@ export default class Toolbox {
                     ingredient_tags.push(data[element].ingredients[i].ingredient)
                 }
             }
-            // répuère les tags de type ustensil
+            // récupère les tags de type ustensil
             for (let a in data[element].ustensils) {
                 if (ustensils_tags.includes(data[element].ustensils[a])) {
                     continue
@@ -152,19 +152,19 @@ export default class Toolbox {
     }
 
     static getTags(sorted_recipes) {
-        /* TODO: add commentaire */
+        /* Récupère la totalité des tags de l'application en fonction de la recherche principale */
         let appliance_tags = []
         let ingredient_tags = []
         let ustensils_tags = []
         for (let element in sorted_recipes) {
-            // répuère les tags de type appliance
+            // récupère les tags de type appliance
             if (appliance_tags.includes(sorted_recipes[element].appliance)) {
                 continue
             }
             else {
                 appliance_tags.push(sorted_recipes[element].appliance)
             }
-            // répuère les tags de type ingredient
+            // récupère les tags de type ingredient
             for (let i in sorted_recipes[element].ingredients) {
                 if (ingredient_tags.includes(sorted_recipes[element].ingredients[i].ingredient)) {
                     continue
@@ -173,7 +173,7 @@ export default class Toolbox {
                     ingredient_tags.push(sorted_recipes[element].ingredients[i].ingredient)
                 }
             }
-            // répuère les tags de type ustensil
+            // récupère les tags de type ustensil
             for (let a in sorted_recipes[element].ustensils) {
                 if (ustensils_tags.includes(sorted_recipes[element].ustensils[a])) {
                     continue
@@ -187,9 +187,9 @@ export default class Toolbox {
     }
 
     static insertTags(appliance_tags, ingredient_tags, ustensils_tags) {
-        /* Ajoute la totalité des tags de l'application */
-        const appareil_ul = document.getElementById("appareil")
+        /* Ajoute la totalité des tags de l'application en fonction de la recherche principale */
         const ingredients_ul = document.getElementById("ingredients")
+        const appareil_ul = document.getElementById("appareil")
         const ustensiles_ul = document.getElementById("ustensiles")
         let appliance_tags_html = ""
         let ingredient_tags_html = ""
@@ -211,24 +211,43 @@ export default class Toolbox {
         ustensiles_ul.insertAdjacentHTML("beforeend", ustensils_tags_html);
     }
 
-    static sortTags(type, search_value) {
-        /* TODO: add commentaire */
-        const regex_tags = RegExp(">(...{0,})<")
-        let current_tags = []
+    static sortTags(type, search_value, current_tags) {
+        /* Tri les tags en fonction de la recherche de l'utilisateur */
+        const regex_search = RegExp(`(\\b${search_value})`)
+        let sorted_tags = []
+        for (let element in current_tags) {
+            if (regex_search.exec(current_tags[element].toLowerCase())) {
+                sorted_tags.push(current_tags[element])
+            }
+        }
+        this.insertCurrentTags(type, sorted_tags)
+    }
+
+    static insertCurrentTags(type, sorted_tags) {
+        /* Ajoute les tags correspondants à la recherche */
+        let node = ""
+        let current_tags_html = ""
         if (type == "ingredient") {
-            current_tags = this.getCurrentIngredientTags(regex_tags)
+            node = "ingredients"
         }
         else if (type == "appliance") {
-            current_tags = this.getCurrentApplianceTags(regex_tags)
+            node = "appareil"
         }
         else if (type == "ustensil") {
-            current_tags = this.getCurrentUstensilTags(regex_tags)
+            node = "ustensiles"
         }
-        console.log("current_tags :", current_tags)
+        // récupère le bon node en fonction du type de tag
+        const tags_ul = document.getElementById(`${node}`)
+        for (let element in sorted_tags) {
+            current_tags_html += `<li><a class="text-light" href="#">${sorted_tags[element]}</a></li>`
+        }
+        // supprime les anciens tags avant d'ajouter les nouveaux
+        this.removeCurrentTags(node)
+        tags_ul.insertAdjacentHTML("beforeend", current_tags_html)
     }
 
     static getCurrentIngredientTags(regex_tags) {
-        /* TODO: add commentaire */
+        /* Récupère les tags de type "ingredients" actuelles */
         const ingredients_li = document.querySelectorAll("#ingredients li")
         let current_ingredient = []
         for (let element in ingredients_li) {
@@ -240,7 +259,7 @@ export default class Toolbox {
     }
 
     static getCurrentApplianceTags(regex_tags) {
-        /* TODO: add commentaire */
+        /* Récupère les tags de type "appareil" actuelles */
         const appliance_li = document.querySelectorAll("#appareil li")
         let current_appliance = []
         for (let element in appliance_li) {
@@ -252,7 +271,7 @@ export default class Toolbox {
     }
 
     static getCurrentUstensilTags(regex_tags) {
-        /* TODO: add commentaire */
+        /* Récupère les tags de type "ustensiles" actuelles */
         const ustensils_li = document.querySelectorAll("#ustensiles li")
         let current_ustensil = []
         for (let element in ustensils_li) {
@@ -330,7 +349,6 @@ export default class Toolbox {
 
     static removeTags() {
         /* Supprime les tags */
-        console.log("On passe bien dans remove tags!!")
         try {
             const filters = document.querySelectorAll(".filters li")
             for (let element in filters) {
@@ -340,5 +358,19 @@ export default class Toolbox {
         catch {
             console.info("code : removeTags()")
         }
+    }
+
+    static removeCurrentTags(node) {
+        /* Supprime les tags actuelles en fonction d'un type donner */
+        const tags_li = document.querySelectorAll(`#${node} li`)
+        for (let element in tags_li) {
+            try {
+                tags_li[element].remove()
+            }
+            catch {
+                console.info("code : removeCurrentTags()")
+            }
+        }
+
     }
 }

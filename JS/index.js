@@ -26,33 +26,43 @@ function scenario(recipes) {
     Toolbox.insertAllRecipes(recipes)
     Toolbox.getAllTags(recipes)
 
-    // DOM Elements
+    const regex_tags = RegExp(">(...{0,})<")
+    // récupère les tags après la recherche principale
+    let current_ingredient_tags = Toolbox.getCurrentIngredientTags(regex_tags)
+    let current_appliancet_ags = Toolbox.getCurrentApplianceTags(regex_tags)
+    let current_ustensil_tags = Toolbox.getCurrentUstensilTags(regex_tags)
+
+    // DOM elements
     const search_bar = document.getElementById("search_bar")
     const search_ingredients = document.getElementById("search_ingredients")
     const search_appareil = document.getElementById("search_appareil")
     const search_ustensiles = document.getElementById("search_ustensiles")
 
-    // Events
+    // events
     search_bar.addEventListener("input", (e) => {
         let search_value = e.target.value
         // lance la recherche à partir de 3 caractère
         if (search_value.length >= 3) {
             Toolbox.sortRecipe(recipes, search_value.toLowerCase())
         }
+        // récupère les tags après la mise à jour de la recherche principale
+        current_ingredient_tags = Toolbox.getCurrentIngredientTags(regex_tags)
+        current_appliancet_ags = Toolbox.getCurrentApplianceTags(regex_tags)
+        current_ustensil_tags = Toolbox.getCurrentUstensilTags(regex_tags)
     })
     // TODO: add commentaire
     search_ingredients.addEventListener("input", (e) => {
         let search_value = e.target.value
-        Toolbox.sortTags("ingredient", search_value.toLowerCase())
+        Toolbox.sortTags("ingredient", search_value.toLowerCase(), current_ingredient_tags)
     })
     // TODO: add commentaire
     search_appareil.addEventListener("input", (e) => {
         let search_value = e.target.value
-        Toolbox.sortTags("appliance", search_value.toLowerCase())
+        Toolbox.sortTags("appliance", search_value.toLowerCase(), current_appliancet_ags)
     })
     // TODO: add commentaire
     search_ustensiles.addEventListener("input", (e) => {
         let search_value = e.target.value
-        Toolbox.sortTags("ustensil", search_value.toLowerCase())
+        Toolbox.sortTags("ustensil", search_value.toLowerCase(), current_ustensil_tags)
     })
 }
