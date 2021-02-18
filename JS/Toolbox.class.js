@@ -94,6 +94,8 @@ export default class Toolbox {
             this.removeTags()
             // récupère les tags en fonction de la recherche en cours
             this.getTags(sorted_recipes)
+            //TODO: add commentaire
+            this.sortRecipeAfterTag(sorted_recipes)
         }
         else {
             // supprime les cartes existantes
@@ -103,6 +105,87 @@ export default class Toolbox {
             // ajout du message "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc..."
             this.incorrectSorting()
         }
+    }
+
+    static sortRecipeAfterTag(recipes) {
+        /* TODO: add commentaire */
+        let tags_list = this.getTagsAdded()
+        const card_title = document.querySelectorAll(".card-title")
+        const cards = document.querySelectorAll(".col-xl-4")
+        let current_recipes = []
+        let current_cards = []
+        let all_sorted_recipes = []
+        let remove_recipes = []
+
+        for (let element in card_title) {
+            if (card_title[element].innerText != undefined) {
+                current_recipes.push(card_title[element])
+                current_cards.push(cards[element])
+            }
+        }
+        console.log("current_recipes :", current_recipes)
+
+        if (tags_list.length > 0) {
+            for (let element in recipes) {
+                let name = recipes[element]["name"].toLowerCase()
+                let appareil = recipes[element]["appliance"].toLowerCase()
+                let ingredients = recipes[element]["ingredients"]
+                for (let i in tags_list) {
+                    const regex_tag = RegExp(`(\\b${tags_list[i].toLowerCase()})`)
+                    // cherche si on a une correspondance dans le titre de la recette
+                    if (regex_tag.exec(name)) {
+                        all_sorted_recipes.push(name)
+                        continue
+                    }
+                    // cherche si on a une correspondance dans la description de la recette
+                    if (regex_tag.exec(appareil)) {
+                        all_sorted_recipes.push(name)
+                        continue
+                    }
+                    // cherche si on a une correspondance dans les ingrédients de la recette
+                    for (let a in recipes[element]["ingredients"]) {
+                        let ingredient = ingredients[a]["ingredient"].toLowerCase()
+                        if (regex_tag.exec(ingredient.toLowerCase()))
+                        all_sorted_recipes.push(name)
+                            continue
+                    }
+                }
+            }
+            console.log("all_sorted_recipes ::", all_sorted_recipes)
+
+            for (let element in current_recipes) {
+                let current_recipes_name = current_recipes[element].innerText.toLowerCase()
+                if (all_sorted_recipes.includes(current_recipes_name)) {
+                    continue
+                }
+                else {
+                    remove_recipes.push(current_cards[element])
+                }
+            }
+            console.log("remove_recipes :", remove_recipes)
+
+            for (let element in remove_recipes) {
+                remove_recipes[element].remove()
+            }
+        }
+    }
+
+    static getTagsAdded() {
+        /* TODO: add commentaire */
+        const tag = document.querySelectorAll(".tag")
+        let tags_list = []
+        try {
+            for (let element in tag) {
+                if (tag[element].innerText != undefined) {
+                    tags_list.push(tag[element].innerText.slice(0, -1).toLowerCase())
+                }
+            }
+        }
+        catch {
+            console.info("code : getTagAdded()")
+        }
+        console.log("tags_list", tags_list)
+        return tags_list
     }
 
     static incorrectSorting() {
@@ -392,14 +475,14 @@ export default class Toolbox {
         }
     }
 
-    static clickOnAllTags() {
+    static clickOnAllTags(recipes) {
         /* TODO: add commentaire */
-        this.clickOnIngredientsTags()
-        this.clickOnAppareilTags()
-        this.clickOnUstensilesTags()
+        this.clickOnIngredientsTags(recipes)
+        this.clickOnAppareilTags(recipes)
+        this.clickOnUstensilesTags(recipes)
     }
 
-    static clickOnIngredientsTags() {
+    static clickOnIngredientsTags(recipes) {
         /* TODO: add commentaire */
         const ingredients_tags = document.querySelectorAll("#ingredients li")
         let type = "ingredients"
@@ -408,7 +491,7 @@ export default class Toolbox {
             try {
                 ingredients_tags[element].addEventListener("click", () => {
                     data = ingredients_tags[element].innerText
-                    this.addTag(type, data)
+                    this.addTag(recipes, type, data)
                 })
             } catch {
                 console.info("code : clickOnIngredientsTags()")
@@ -416,7 +499,7 @@ export default class Toolbox {
         }
     }
 
-    static clickOnAppareilTags() {
+    static clickOnAppareilTags(recipes) {
         /* TODO: add commentaire */
         const appareil_tags = document.querySelectorAll("#appareil li")
         let type = "appareil"
@@ -425,7 +508,7 @@ export default class Toolbox {
             try {
                 appareil_tags[element].addEventListener("click", () => {
                     data = appareil_tags[element].innerText
-                    this.addTag(type, data)
+                    this.addTag(recipes, type, data)
                 })
             } catch {
                 console.info("code : clickOnAppareilTags()")
@@ -433,7 +516,7 @@ export default class Toolbox {
         }
     }
 
-    static clickOnUstensilesTags() {
+    static clickOnUstensilesTags(recipes) {
         /* TODO: add commentaire */
         const ustensiles_tags = document.querySelectorAll("#ustensiles li")
         let type = "ustensiles"
@@ -442,7 +525,7 @@ export default class Toolbox {
             try {
                 ustensiles_tags[element].addEventListener("click", () => {
                     data = ustensiles_tags[element].innerText
-                    this.addTag(type, data)
+                    this.addTag(recipes, type, data)
                 })
             } catch {
                 console.info("code : clickOnUstensilesTags()")
@@ -450,7 +533,7 @@ export default class Toolbox {
         }
     }
 
-    static addTag(type, data) {
+    static addTag(recipes, type, data) {
         /* TODO: add commentaire */
         const tags_section = document.getElementById("tags_section")
         let custom_color = ""
@@ -474,8 +557,8 @@ export default class Toolbox {
         </button>
         `
         tags_section.insertAdjacentHTML("afterbegin", tag_html)
+        this.sortRecipeAfterTag(recipes)
         this.deleteTag()
-        // TODO: filtrer à l'aide des tags
     }
 
     static deleteTag() {

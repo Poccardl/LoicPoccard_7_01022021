@@ -25,7 +25,7 @@ function scenario(recipes) {
     /* TODO: add commentaire */
     Toolbox.insertAllRecipes(recipes)
     Toolbox.getAllTags(recipes)
-    Toolbox.clickOnAllTags()
+    Toolbox.clickOnAllTags(recipes["recipes"])
 
     const regex_tags = RegExp(">(...{0,})<")
     // récupère les tags après la recherche principale
@@ -49,7 +49,7 @@ function scenario(recipes) {
         // lance la recherche à partir de 3 caractère
         if (search_value.length >= 3) {
             Toolbox.sortRecipe(recipes, search_value.toLowerCase())
-            Toolbox.clickOnAllTags()
+            Toolbox.clickOnAllTags(recipes["recipes"])
         }
         // récupère les tags après la mise à jour de la recherche principale
         current_ingredient_tags = Toolbox.getCurrentIngredientTags(regex_tags)
@@ -59,15 +59,15 @@ function scenario(recipes) {
     // TODO: add commentaire
     search_ingredients.addEventListener("input", (e) => {
         Toolbox.sortTags("ingredient", e.target.value.toLowerCase(), current_ingredient_tags)
-        Toolbox.clickOnIngredientsTags()
+        Toolbox.clickOnIngredientsTags(recipes["recipes"])
     })
     search_appareil.addEventListener("input", (e) => {
         Toolbox.sortTags("appliance", e.target.value.toLowerCase(), current_appliancet_ags)
-        Toolbox.clickOnAppareilTags()
+        Toolbox.clickOnAppareilTags(recipes["recipes"])
     })
     search_ustensiles.addEventListener("input", (e) => {
         Toolbox.sortTags("ustensil", e.target.value.toLowerCase(), current_ustensil_tags)
-        Toolbox.clickOnUstensilesTags()
+        Toolbox.clickOnUstensilesTags(recipes["recipes"])
     })
     // TODO: add commentaire
     ingredients_btn.addEventListener("click", () => {
