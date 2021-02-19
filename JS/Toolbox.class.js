@@ -129,26 +129,46 @@ export default class Toolbox {
             for (let element in recipes) {
                 let name = recipes[element]["name"].toLowerCase()
                 let appareil = recipes[element]["appliance"].toLowerCase()
+                let ustensiles = recipes[element]["ustensils"]
                 let ingredients = recipes[element]["ingredients"]
+                let flag_list = []
                 for (let i in tags_list) {
+                    let flag = false
                     const regex_tag = RegExp(`(\\b${tags_list[i].toLowerCase()})`)
                     // cherche si on a une correspondance dans le titre de la recette
                     if (regex_tag.exec(name)) {
-                        all_sorted_recipes.push(name)
+                        flag = true
                         continue
                     }
                     // cherche si on a une correspondance dans la description de la recette
                     if (regex_tag.exec(appareil)) {
-                        all_sorted_recipes.push(name)
+                        flag = true
                         continue
+                    }
+                    // cherche si on a une correspondance dans les ustensils de la recette
+                    for (let f in ustensiles) {
+                        let ustensile = ustensiles[f].toLowerCase()
+                        if (regex_tag.exec(ustensile)) {
+                            flag = true
+                            continue
+                        }
                     }
                     // cherche si on a une correspondance dans les ingrédients de la recette
                     for (let a in recipes[element]["ingredients"]) {
                         let ingredient = ingredients[a]["ingredient"].toLowerCase()
-                        if (regex_tag.exec(ingredient.toLowerCase()))
-                        all_sorted_recipes.push(name)
+                        if (regex_tag.exec(ingredient)) {
+                            flag = true
                             continue
+                        }
                     }
+                    flag_list.push(flag)
+                }
+                // Ajoute la recette si tous les tags sont compatibles avec celle-ci
+                if (flag_list.includes(false)) {
+                    continue
+                }
+                else {
+                    all_sorted_recipes.push(name)
                 }
             }
             console.log("all_sorted_recipes ::", all_sorted_recipes)
