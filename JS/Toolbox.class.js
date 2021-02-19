@@ -94,7 +94,7 @@ export default class Toolbox {
             this.removeTags()
             // récupère les tags en fonction de la recherche en cours
             this.getTags(sorted_recipes)
-            //TODO: add commentaire
+            // TODO: add commentaire
             this.sortRecipeAfterTag(sorted_recipes)
         }
         else {
@@ -125,78 +125,74 @@ export default class Toolbox {
             }
         }
         console.log("current_recipes :", current_recipes)
-
-        if (tags_list.length > 0) {
-            for (let element in recipes) {
-                let name = recipes[element]["name"].toLowerCase()
-                let appareil = recipes[element]["appliance"].toLowerCase()
-                let ustensiles = recipes[element]["ustensils"]
-                let ingredients = recipes[element]["ingredients"]
-                let flag_list = []
-                for (let i in tags_list) {
-                    let flag = false
-                    const regex_tag = RegExp(`(\\b${tags_list[i].toLowerCase()})`)
-                    // cherche si on a une correspondance dans le titre de la recette
-                    if (regex_tag.exec(name)) {
+        for (let element in recipes) {
+            let name = recipes[element]["name"].toLowerCase()
+            let appareil = recipes[element]["appliance"].toLowerCase()
+            let ustensiles = recipes[element]["ustensils"]
+            let ingredients = recipes[element]["ingredients"]
+            let flag_list = []
+            for (let i in tags_list) {
+                let flag = false
+                const regex_tag = RegExp(`(\\b${tags_list[i].toLowerCase()})`)
+                // cherche si on a une correspondance dans le titre de la recette
+                if (regex_tag.exec(name)) {
+                    flag = true
+                    continue
+                }
+                // cherche si on a une correspondance dans la description de la recette
+                if (regex_tag.exec(appareil)) {
+                    flag = true
+                    continue
+                }
+                // cherche si on a une correspondance dans les ustensiles de la recette
+                for (let f in ustensiles) {
+                    let ustensile = ustensiles[f].toLowerCase()
+                    if (regex_tag.exec(ustensile)) {
                         flag = true
                         continue
                     }
-                    // cherche si on a une correspondance dans la description de la recette
-                    if (regex_tag.exec(appareil)) {
+                }
+                // cherche si on a une correspondance dans les ingrédients de la recette
+                for (let a in recipes[element]["ingredients"]) {
+                    let ingredient = ingredients[a]["ingredient"].toLowerCase()
+                    if (regex_tag.exec(ingredient)) {
                         flag = true
                         continue
                     }
-                    // cherche si on a une correspondance dans les ustensiles de la recette
-                    for (let f in ustensiles) {
-                        let ustensile = ustensiles[f].toLowerCase()
-                        if (regex_tag.exec(ustensile)) {
-                            flag = true
-                            continue
-                        }
-                    }
-                    // cherche si on a une correspondance dans les ingrédients de la recette
-                    for (let a in recipes[element]["ingredients"]) {
-                        let ingredient = ingredients[a]["ingredient"].toLowerCase()
-                        if (regex_tag.exec(ingredient)) {
-                            flag = true
-                            continue
-                        }
-                    }
-                    flag_list.push(flag)
                 }
-                // Ajoute la recette si tous les tags sont compatibles avec celle-ci
-                if (flag_list.includes(false)) {
-                    continue
-                }
-                else {
-                    all_sorted_recipes.push(name)
-                    sorted_recipes.push(recipes[element])
-                }
+                flag_list.push(flag)
             }
-            console.log("all_sorted_recipes ::", all_sorted_recipes)
-
-            for (let element in current_recipes) {
-                let current_recipes_name = current_recipes[element].innerText.toLowerCase()
-                if (all_sorted_recipes.includes(current_recipes_name)) {
-                    continue
-                }
-                else {
-                    remove_recipes.push(current_cards[element])
-                }
+            // Ajoute la recette si tous les tags sont compatibles avec celle-ci
+            if (flag_list.includes(false)) {
+                continue
             }
-            console.log("remove_recipes :", remove_recipes)
-
-            for (let element in remove_recipes) {
-                remove_recipes[element].remove()
+            else {
+                all_sorted_recipes.push(name)
+                sorted_recipes.push(recipes[element])
             }
-            // TODO: faire une update des Tags disponibles...
-            // supprime les tags existants
-            this.removeTags()
-            // récupère les tags en fonction de la recherche en cours
-            this.getTags(sorted_recipes)
-            // TODO: add commentaire
-            this.clickOnAllTags(recipes)
         }
+        console.log("all_sorted_recipes ::", all_sorted_recipes)
+
+        for (let element in current_recipes) {
+            let current_recipes_name = current_recipes[element].innerText.toLowerCase()
+            if (all_sorted_recipes.includes(current_recipes_name)) {
+                continue
+            }
+            else {
+                remove_recipes.push(current_cards[element])
+            }
+        }
+        console.log("remove_recipes :", remove_recipes)
+
+        for (let element in remove_recipes) {
+            remove_recipes[element].remove()
+        }
+        // supprime les tags existants
+        this.removeTags()
+        // récupère les tags en fonction de la recherche en cours
+        this.getTags(sorted_recipes)
+        // TODO: add commentaire
+        this.clickOnAllTags(recipes)
     }
 
     static getTagsAdded() {
@@ -264,7 +260,6 @@ export default class Toolbox {
     }
 
     static getTags(sorted_recipes) {
-        console.log("sorted_recipes////", sorted_recipes)
         /* Récupère la totalité des tags de l'application en fonction de la recherche principale, par tags */
         let appliance_tags = []
         let ingredient_tags = []
@@ -588,10 +583,10 @@ export default class Toolbox {
         `
         tags_section.insertAdjacentHTML("afterbegin", tag_html)
         this.sortRecipeAfterTag(recipes)
-        this.deleteTag()
+        this.deleteTag(recipes)
     }
 
-    static deleteTag() {
+    static deleteTag(recipes) {
         /* TODO: add commentaire */
         const tag = document.querySelectorAll(".tag")
         const close_tag = document.querySelectorAll(".tag #close_tag")
@@ -599,12 +594,13 @@ export default class Toolbox {
             try {
                 close_tag[element].addEventListener("click", () => {
                     tag[element].remove()
+                    this.sortRecipeAfterTag(recipes)
+                    // TODO: faire une update de la recherche au niveau des recettes
                 })
             }
             catch {
                 console.info("code : deleteTag()")
             }
         }
-        // TODO: filtrer sans le tag supprimé
     }
 }

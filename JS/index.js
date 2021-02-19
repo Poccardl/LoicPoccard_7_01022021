@@ -49,7 +49,6 @@ function scenario(recipes) {
         // lance la recherche à partir de 3 caractère
         if (search_value.length >= 3) {
             Toolbox.sortRecipe(recipes, search_value.toLowerCase())
-            Toolbox.clickOnAllTags(recipes["recipes"])
         }
         // récupère les tags après la mise à jour de la recherche principale
         current_ingredient_tags = Toolbox.getCurrentIngredientTags(regex_tags)
