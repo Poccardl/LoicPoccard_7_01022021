@@ -43,7 +43,7 @@ function scenario(recipes) {
     const ustensiles_btn = document.getElementById("ustensiles_btn")
 
     // events
-    // TODO: add commentaire
+    // créer un EventListener lors d'un input dans la barre de recherche principale
     search_bar.addEventListener("input", (e) => {
         let search_value = e.target.value
         // lance la recherche à partir de 3 caractère
@@ -55,7 +55,7 @@ function scenario(recipes) {
         current_appliancet_ags = Toolbox.getCurrentApplianceTags(regex_tags)
         current_ustensil_tags = Toolbox.getCurrentUstensilTags(regex_tags)
     })
-    // TODO: add commentaire
+    // créer un EventListener lors d'un input dans l'une des barres de recherche des tags
     search_ingredients.addEventListener("input", (e) => {
         Toolbox.sortTags("ingredient", e.target.value.toLowerCase(), current_ingredient_tags)
         Toolbox.clickOnIngredientsTags(recipes["recipes"])
@@ -68,7 +68,7 @@ function scenario(recipes) {
         Toolbox.sortTags("ustensil", e.target.value.toLowerCase(), current_ustensil_tags)
         Toolbox.clickOnUstensilesTags(recipes["recipes"])
     })
-    // TODO: add commentaire
+    // ouvre, ferme les dropdown des différents tags
     ingredients_btn.addEventListener("click", () => {
         Toolbox.activeDropdown("ingredients", ingredients_btn)
     })

@@ -88,13 +88,13 @@ export default class Toolbox {
             console.info("code : sortRecipe()")
         }
         if (sorted_recipes.length > 0) {
-            // TODO: add commentaire
+            // ajoute les recettes après recherche
             this.insertSortRecipe(sorted_recipes)
             // supprime les tags existants
             this.removeTags()
             // récupère les tags en fonction de la recherche en cours
             this.getTags(sorted_recipes)
-            // TODO: add commentaire
+            // update les tags
             this.sortRecipeAfterTag(sorted_recipes)
         }
         else {
@@ -108,7 +108,7 @@ export default class Toolbox {
     }
 
     static sortRecipeAfterTag(recipes) {
-        /* TODO: add commentaire */
+        /* Actualise les tags après une recherche ou l'ajout d'un tag */
         let tags_list = this.getTagsAdded()
         const card_title = document.querySelectorAll(".card-title")
         const cards = document.querySelectorAll(".col-xl-4")
@@ -162,7 +162,7 @@ export default class Toolbox {
                 }
                 flag_list.push(flag)
             }
-            // Ajoute la recette si tous les tags sont compatibles avec celle-ci
+            // ajoute la recette si tous les tags sont compatibles avec celle-ci
             if (flag_list.includes(false)) {
                 continue
             }
@@ -191,12 +191,12 @@ export default class Toolbox {
         this.removeTags()
         // récupère les tags en fonction de la recherche en cours
         this.getTags(sorted_recipes)
-        // TODO: add commentaire
+        // rafraichi le DOM pour les nouveaux tags
         this.clickOnAllTags(recipes)
     }
 
     static getTagsAdded() {
-        /* TODO: add commentaire */
+        /* Récupère la liste des tags qui ont été ajoutés */
         const tag = document.querySelectorAll(".tag")
         let tags_list = []
         try {
@@ -483,7 +483,7 @@ export default class Toolbox {
     }
 
     static activeDropdown(type, btn) {
-        /* TODO: add commentaire */
+        /* Active les dropdown */
         let active_class = "col-xl-6"
         let inactive_class = "col-xl-2"
         const dropdown = document.getElementById(`${type}_section`)
@@ -501,14 +501,14 @@ export default class Toolbox {
     }
 
     static clickOnAllTags(recipes) {
-        /* TODO: add commentaire */
+        /* Update le DOM pour tous les types de tag */
         this.clickOnIngredientsTags(recipes)
         this.clickOnAppareilTags(recipes)
         this.clickOnUstensilesTags(recipes)
     }
 
     static clickOnIngredientsTags(recipes) {
-        /* TODO: add commentaire */
+        /* Update le DOM pour les tags de type ingredients */
         const ingredients_tags = document.querySelectorAll("#ingredients li")
         let type = "ingredients"
         let data = ""
@@ -525,7 +525,7 @@ export default class Toolbox {
     }
 
     static clickOnAppareilTags(recipes) {
-        /* TODO: add commentaire */
+        /* Update le DOM pour les tags de type appareil */
         const appareil_tags = document.querySelectorAll("#appareil li")
         let type = "appareil"
         let data = ""
@@ -542,7 +542,7 @@ export default class Toolbox {
     }
 
     static clickOnUstensilesTags(recipes) {
-        /* TODO: add commentaire */
+        /* Update le DOM pour les tags de type ustensiles */
         const ustensiles_tags = document.querySelectorAll("#ustensiles li")
         let type = "ustensiles"
         let data = ""
@@ -559,7 +559,7 @@ export default class Toolbox {
     }
 
     static addTag(recipes, type, data) {
-        /* TODO: add commentaire */
+        /* Ajoute un tag */
         const tags_section = document.getElementById("tags_section")
         let custom_color = ""
         if (type == "ingredients") {
@@ -587,7 +587,7 @@ export default class Toolbox {
     }
 
     static deleteTag(recipes) {
-        /* TODO: add commentaire */
+        /* Supprime un tag */
         const tag = document.querySelectorAll(".tag")
         const close_tag = document.querySelectorAll(".tag #close_tag")
         for (let element in tag) {
@@ -595,7 +595,7 @@ export default class Toolbox {
                 close_tag[element].addEventListener("click", () => {
                     tag[element].remove()
                     this.sortRecipeAfterTag(recipes)
-                    // TODO: faire une update de la recherche au niveau des recettes
+                    // TODO: faire une update de la recherche au niveau des recettes ?
                 })
             }
             catch {
