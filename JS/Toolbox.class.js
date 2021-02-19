@@ -116,6 +116,7 @@ export default class Toolbox {
         let current_cards = []
         let all_sorted_recipes = []
         let remove_recipes = []
+        let sorted_recipes = []
 
         for (let element in card_title) {
             if (card_title[element].innerText != undefined) {
@@ -145,7 +146,7 @@ export default class Toolbox {
                         flag = true
                         continue
                     }
-                    // cherche si on a une correspondance dans les ustensils de la recette
+                    // cherche si on a une correspondance dans les ustensiles de la recette
                     for (let f in ustensiles) {
                         let ustensile = ustensiles[f].toLowerCase()
                         if (regex_tag.exec(ustensile)) {
@@ -169,6 +170,7 @@ export default class Toolbox {
                 }
                 else {
                     all_sorted_recipes.push(name)
+                    sorted_recipes.push(recipes[element])
                 }
             }
             console.log("all_sorted_recipes ::", all_sorted_recipes)
@@ -187,6 +189,13 @@ export default class Toolbox {
             for (let element in remove_recipes) {
                 remove_recipes[element].remove()
             }
+            // TODO: faire une update des Tags disponibles...
+            // supprime les tags existants
+            this.removeTags()
+            // récupère les tags en fonction de la recherche en cours
+            this.getTags(sorted_recipes)
+            // TODO: add commentaire
+            this.clickOnAllTags(recipes)
         }
     }
 
@@ -255,7 +264,8 @@ export default class Toolbox {
     }
 
     static getTags(sorted_recipes) {
-        /* Récupère la totalité des tags de l'application en fonction de la recherche principale */
+        console.log("sorted_recipes////", sorted_recipes)
+        /* Récupère la totalité des tags de l'application en fonction de la recherche principale, par tags */
         let appliance_tags = []
         let ingredient_tags = []
         let ustensils_tags = []
