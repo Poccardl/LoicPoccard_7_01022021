@@ -171,14 +171,12 @@ export default class RecipesToolbox {
         let all_sorted_recipes = []
         let remove_recipes = []
         let sorted_recipes = []
-
         for (let element in card_title) {
             if (card_title[element].innerText != undefined) {
                 current_recipes.push(card_title[element])
                 current_cards.push(cards[element])
             }
         }
-        console.log("current_recipes :", current_recipes)
         for (let element in recipes) {
             let name = recipes[element]["name"].toLowerCase()
             let appareil = recipes[element]["appliance"].toLowerCase()
@@ -225,8 +223,6 @@ export default class RecipesToolbox {
                 sorted_recipes.push(recipes[element])
             }
         }
-        console.log("all_sorted_recipes ::", all_sorted_recipes)
-
         for (let element in current_recipes) {
             let current_recipes_name = current_recipes[element].innerText.toLowerCase()
             if (all_sorted_recipes.includes(current_recipes_name)) {
@@ -236,8 +232,6 @@ export default class RecipesToolbox {
                 remove_recipes.push(current_cards[element])
             }
         }
-        console.log("remove_recipes :", remove_recipes)
-
         for (let element in remove_recipes) {
             remove_recipes[element].remove()
         }

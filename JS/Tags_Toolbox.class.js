@@ -184,7 +184,6 @@ export default class TagsToolbox {
         catch {
             console.info("code : getTagAdded()")
         }
-        console.log("tags_list", tags_list)
         return tags_list
     }
 
