@@ -1,6 +1,7 @@
 // imports
 import Recipe from "./Recipe.class.js"
-import Toolbox from "./Toolbox.class.js"
+import RecipesToolbox from "./Recipes_Toolbox.class.js"
+import TagsToolbox from "./Tags_Toolbox.class.js"
 
 fetchData()
 
@@ -23,15 +24,15 @@ function fetchData() {
 
 function scenario(recipes) {
     /* TODO: add commentaire */
-    Toolbox.insertAllRecipes(recipes)
-    Toolbox.getAllTags(recipes)
-    Toolbox.clickOnAllTags(recipes["recipes"])
+    RecipesToolbox.insertAllRecipes(recipes)
+    TagsToolbox.getAllTags(recipes)
+    TagsToolbox.clickOnAllTags(recipes["recipes"])
 
     const regex_tags = RegExp(">(...{0,})<")
     // récupère les tags après la recherche principale
-    let current_ingredient_tags = Toolbox.getCurrentIngredientTags(regex_tags)
-    let current_appliancet_ags = Toolbox.getCurrentApplianceTags(regex_tags)
-    let current_ustensil_tags = Toolbox.getCurrentUstensilTags(regex_tags)
+    let current_ingredient_tags = TagsToolbox.getCurrentIngredientTags(regex_tags)
+    let current_appliancet_ags = TagsToolbox.getCurrentApplianceTags(regex_tags)
+    let current_ustensil_tags = TagsToolbox.getCurrentUstensilTags(regex_tags)
 
     // DOM elements
     const search_bar = document.getElementById("search_bar")
@@ -48,34 +49,34 @@ function scenario(recipes) {
         let search_value = e.target.value
         // lance la recherche à partir de 3 caractère
         if (search_value.length >= 3) {
-            Toolbox.sortRecipe(recipes, search_value.toLowerCase())
+            RecipesToolbox.sortRecipe(recipes, search_value.toLowerCase())
         }
         // récupère les tags après la mise à jour de la recherche principale
-        current_ingredient_tags = Toolbox.getCurrentIngredientTags(regex_tags)
-        current_appliancet_ags = Toolbox.getCurrentApplianceTags(regex_tags)
-        current_ustensil_tags = Toolbox.getCurrentUstensilTags(regex_tags)
+        current_ingredient_tags = TagsToolbox.getCurrentIngredientTags(regex_tags)
+        current_appliancet_ags = TagsToolbox.getCurrentApplianceTags(regex_tags)
+        current_ustensil_tags = TagsToolbox.getCurrentUstensilTags(regex_tags)
     })
     // créer un EventListener lors d'un input dans l'une des barres de recherche des tags
     search_ingredients.addEventListener("input", (e) => {
-        Toolbox.sortTags("ingredient", e.target.value.toLowerCase(), current_ingredient_tags)
-        Toolbox.clickOnIngredientsTags(recipes["recipes"])
+        TagsToolbox.sortTags("ingredient", e.target.value.toLowerCase(), current_ingredient_tags)
+        TagsToolbox.clickOnIngredientsTags(recipes["recipes"])
     })
     search_appareil.addEventListener("input", (e) => {
-        Toolbox.sortTags("appliance", e.target.value.toLowerCase(), current_appliancet_ags)
-        Toolbox.clickOnAppareilTags(recipes["recipes"])
+        TagsToolbox.sortTags("appliance", e.target.value.toLowerCase(), current_appliancet_ags)
+        TagsToolbox.clickOnAppareilTags(recipes["recipes"])
     })
     search_ustensiles.addEventListener("input", (e) => {
-        Toolbox.sortTags("ustensil", e.target.value.toLowerCase(), current_ustensil_tags)
-        Toolbox.clickOnUstensilesTags(recipes["recipes"])
+        TagsToolbox.sortTags("ustensil", e.target.value.toLowerCase(), current_ustensil_tags)
+        TagsToolbox.clickOnUstensilesTags(recipes["recipes"])
     })
     // ouvre, ferme les dropdown des différents tags
     ingredients_btn.addEventListener("click", () => {
-        Toolbox.activeDropdown("ingredients", ingredients_btn)
+        RecipesToolbox.activeDropdown("ingredients", ingredients_btn)
     })
     appareil_btn.addEventListener("click", () => {
-        Toolbox.activeDropdown("appareil", appareil_btn)
+        RecipesToolbox.activeDropdown("appareil", appareil_btn)
     })
     ustensiles_btn.addEventListener("click", () => {
-        Toolbox.activeDropdown("ustensiles", ustensiles_btn)
+        RecipesToolbox.activeDropdown("ustensiles", ustensiles_btn)
     })
 }
