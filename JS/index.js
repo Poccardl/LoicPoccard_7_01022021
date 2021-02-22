@@ -3,6 +3,7 @@ import Recipe from "./Recipe.class.js"
 import RecipesToolbox from "./Recipes_Toolbox.class.js"
 import TagsToolbox from "./Tags_Toolbox.class.js"
 
+
 fetchData()
 
 function fetchData() {
@@ -28,11 +29,11 @@ function scenario(recipes) {
     TagsToolbox.getAllTags(recipes)
     TagsToolbox.clickOnAllTags(recipes["recipes"])
 
-    const regex_tags = RegExp(">(...{0,})<")
+    window.regex_tags = RegExp(">(...{0,})<")
     // récupère les tags après la recherche principale
-    let current_ingredient_tags = TagsToolbox.getCurrentIngredientTags(regex_tags)
-    let current_appliancet_ags = TagsToolbox.getCurrentApplianceTags(regex_tags)
-    let current_ustensil_tags = TagsToolbox.getCurrentUstensilTags(regex_tags)
+    window.current_ingredient_tags = TagsToolbox.getCurrentIngredientTags(window.regex_tags)
+    window.current_appliancet_ags = TagsToolbox.getCurrentApplianceTags(window.regex_tags)
+    window.current_ustensil_tags = TagsToolbox.getCurrentUstensilTags(window.regex_tags)
 
     // DOM elements
     const search_bar = document.getElementById("search_bar")
@@ -52,21 +53,21 @@ function scenario(recipes) {
             RecipesToolbox.sortRecipe(recipes["recipes"], search_value.toLowerCase())
         }
         // récupère les tags après la mise à jour de la recherche principale
-        current_ingredient_tags = TagsToolbox.getCurrentIngredientTags(regex_tags)
-        current_appliancet_ags = TagsToolbox.getCurrentApplianceTags(regex_tags)
-        current_ustensil_tags = TagsToolbox.getCurrentUstensilTags(regex_tags)
+        window.current_ingredient_tags = TagsToolbox.getCurrentIngredientTags(window.regex_tags)
+        window.current_appliancet_ags = TagsToolbox.getCurrentApplianceTags(window.regex_tags)
+        window.current_ustensil_tags = TagsToolbox.getCurrentUstensilTags(window.regex_tags)
     })
     // créer un EventListener lors d'un input dans l'une des barres de recherche des tags
     search_ingredients.addEventListener("input", (e) => {
-        TagsToolbox.sortTags("ingredient", e.target.value.toLowerCase(), current_ingredient_tags)
+        TagsToolbox.sortTags("ingredient", e.target.value.toLowerCase(), window.current_ingredient_tags)
         TagsToolbox.clickOnIngredientsTags(recipes["recipes"])
     })
     search_appareil.addEventListener("input", (e) => {
-        TagsToolbox.sortTags("appliance", e.target.value.toLowerCase(), current_appliancet_ags)
+        TagsToolbox.sortTags("appliance", e.target.value.toLowerCase(), window.current_appliancet_ags)
         TagsToolbox.clickOnAppareilTags(recipes["recipes"])
     })
     search_ustensiles.addEventListener("input", (e) => {
-        TagsToolbox.sortTags("ustensil", e.target.value.toLowerCase(), current_ustensil_tags)
+        TagsToolbox.sortTags("ustensil", e.target.value.toLowerCase(), window.current_ustensil_tags)
         TagsToolbox.clickOnUstensilesTags(recipes["recipes"])
     })
     // ouvre, ferme les dropdown des différents tags

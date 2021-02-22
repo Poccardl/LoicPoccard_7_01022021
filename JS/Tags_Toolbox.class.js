@@ -234,6 +234,8 @@ export default class TagsToolbox {
                     this.addTag(recipes, type, data)
                     // reset search_value
                     search_ingredients.value = ""
+                    // update des tags de type "ingredients" disponible après l'ajout d'un tag
+                    window.current_ingredient_tags = TagsToolbox.getCurrentIngredientTags(window.regex_tags)
                 })
             } catch {
                 console.info("code : clickOnIngredientsTags()")
@@ -254,6 +256,8 @@ export default class TagsToolbox {
                     this.addTag(recipes, type, data)
                     // reset search_value
                     search_appareil.value = ""
+                    // update des tags de type "appareil" disponible après l'ajout d'un tag
+                    window.current_appliancet_ags = TagsToolbox.getCurrentApplianceTags(window.regex_tags)
                 })
             } catch {
                 console.info("code : clickOnAppareilTags()")
@@ -274,6 +278,8 @@ export default class TagsToolbox {
                     this.addTag(recipes, type, data)
                     // reset search_value
                     search_ustensiles.value = ""
+                    // update des tags de type "ustensiles" disponible après l'ajout d'un tag
+                    window.current_ustensil_tags = TagsToolbox.getCurrentUstensilTags(window.regex_tags)
                 })
             } catch {
                 console.info("code : clickOnUstensilesTags()")
