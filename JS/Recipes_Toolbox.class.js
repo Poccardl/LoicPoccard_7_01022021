@@ -108,7 +108,6 @@ export default class RecipesToolbox {
 
     static sortRecipe(recipes, search_value) {
         /* Tri les recettes en fonction de la recherche de l'utilisateur */
-        recipes = recipes["recipes"]
         const regex_search = RegExp(`(\\b${search_value})`)
         let sorted_recipes = []
         for (let element in recipes) {

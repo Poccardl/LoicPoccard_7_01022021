@@ -224,6 +224,7 @@ export default class TagsToolbox {
     static clickOnIngredientsTags(recipes) {
         /* Update le DOM pour les tags de type ingredients */
         const ingredients_tags = document.querySelectorAll("#ingredients li")
+        const search_ingredients = document.getElementById("search_ingredients")
         let type = "ingredients"
         let data = ""
         for (let element in ingredients_tags) {
@@ -231,6 +232,8 @@ export default class TagsToolbox {
                 ingredients_tags[element].addEventListener("click", () => {
                     data = ingredients_tags[element].innerText
                     this.addTag(recipes, type, data)
+                    // reset search_value
+                    search_ingredients.value = ""
                 })
             } catch {
                 console.info("code : clickOnIngredientsTags()")
@@ -241,6 +244,7 @@ export default class TagsToolbox {
     static clickOnAppareilTags(recipes) {
         /* Update le DOM pour les tags de type appareil */
         const appareil_tags = document.querySelectorAll("#appareil li")
+        const search_appareil = document.getElementById("search_appareil")
         let type = "appareil"
         let data = ""
         for (let element in appareil_tags) {
@@ -248,6 +252,8 @@ export default class TagsToolbox {
                 appareil_tags[element].addEventListener("click", () => {
                     data = appareil_tags[element].innerText
                     this.addTag(recipes, type, data)
+                    // reset search_value
+                    search_appareil.value = ""
                 })
             } catch {
                 console.info("code : clickOnAppareilTags()")
@@ -258,6 +264,7 @@ export default class TagsToolbox {
     static clickOnUstensilesTags(recipes) {
         /* Update le DOM pour les tags de type ustensiles */
         const ustensiles_tags = document.querySelectorAll("#ustensiles li")
+        const search_ustensiles = document.getElementById("search_ustensiles")
         let type = "ustensiles"
         let data = ""
         for (let element in ustensiles_tags) {
@@ -265,6 +272,8 @@ export default class TagsToolbox {
                 ustensiles_tags[element].addEventListener("click", () => {
                     data = ustensiles_tags[element].innerText
                     this.addTag(recipes, type, data)
+                    // reset search_value
+                    search_ustensiles.value = ""
                 })
             } catch {
                 console.info("code : clickOnUstensilesTags()")
@@ -309,7 +318,9 @@ export default class TagsToolbox {
                 close_tag[element].addEventListener("click", () => {
                     tag[element].remove()
                     RecipesToolbox.sortRecipeAfterTag(recipes)
-                    // TODO: faire une update de la recherche au niveau des recettes ?
+                    // TODO: add commentaire
+                    const search_value = document.getElementById("search_bar").value
+                    RecipesToolbox.sortRecipe(recipes, search_value)
                 })
             }
             catch {

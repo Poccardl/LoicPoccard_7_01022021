@@ -49,7 +49,7 @@ function scenario(recipes) {
         let search_value = e.target.value
         // lance la recherche à partir de 3 caractère
         if (search_value.length >= 3) {
-            RecipesToolbox.sortRecipe(recipes, search_value.toLowerCase())
+            RecipesToolbox.sortRecipe(recipes["recipes"], search_value.toLowerCase())
         }
         // récupère les tags après la mise à jour de la recherche principale
         current_ingredient_tags = TagsToolbox.getCurrentIngredientTags(regex_tags)
