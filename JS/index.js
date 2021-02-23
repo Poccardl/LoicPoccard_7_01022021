@@ -3,7 +3,6 @@ import Recipe from "./Recipe.class.js"
 import RecipesToolbox from "./Recipes_Toolbox.class.js"
 import TagsToolbox from "./Tags_Toolbox.class.js"
 
-
 fetchData()
 
 function fetchData() {
@@ -24,7 +23,7 @@ function fetchData() {
 }
 
 function scenario(recipes) {
-    /* TODO: add commentaire */
+    /* Lance la suite d'évènement nécessaire au déroulement de l'application */
     RecipesToolbox.insertAllRecipes(recipes)
     TagsToolbox.getAllTags(recipes)
     TagsToolbox.clickOnAllTags(recipes["recipes"])
@@ -48,7 +47,7 @@ function scenario(recipes) {
     // créer un EventListener lors d'un input dans la barre de recherche principale
     search_bar.addEventListener("input", (e) => {
         let search_value = e.target.value
-        // lance la recherche à partir de 3 caractère
+        // lance la recherche à partir de trois caractères
         if (search_value.length >= 3) {
             RecipesToolbox.sortRecipe(recipes["recipes"], search_value.toLowerCase())
         }

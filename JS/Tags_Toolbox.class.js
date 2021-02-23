@@ -201,7 +201,7 @@ export default class TagsToolbox {
     }
 
     static removeCurrentTags(node) {
-        /* Supprime les tags actuelles en fonction d'un type donner */
+        /* Supprime les tags actuelles en fonction d'un type donné */
         const tags_li = document.querySelectorAll(`#${node} li`)
         for (let element in tags_li) {
             try {
