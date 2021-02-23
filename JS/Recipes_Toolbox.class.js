@@ -106,31 +106,61 @@ export default class RecipesToolbox {
     }
 
     static sortRecipe(recipes, search_value) {
-        /* Tri les recettes en fonction de la recherche de l'utilisateur */
+        /* Tri les recettes en fonction de la recherche de l'utilisateur et du nombre de correspondance pour avoir une recherche plus précise */
         const regex_search = RegExp(`(\\b${search_value})`)
         let sorted_recipes = []
+        let sorted_recipes_lvl_1 = []
+        let sorted_recipes_lvl_2 = []
+        let sorted_recipes_lvl_3 = []
+        let sorted_recipes_lvl_4 = []
         for (let element in recipes) {
+            let correspondence = 0
             let name = recipes[element]["name"].toLowerCase()
             let description = recipes[element]["description"].toLowerCase()
             let ingredients = recipes[element]["ingredients"]
             // cherche si on a une correspondance dans le titre de la recette
             if (name.search(regex_search) != -1) {
-                sorted_recipes.push(recipes[element])
-                continue
+                correspondence ++
             }
             // cherche si on a une correspondance dans la description de la recette
             if (description.search(regex_search) != -1) {
-                sorted_recipes.push(recipes[element])
-                continue
+                correspondence ++
             }
             // cherche si on a une correspondance dans les ingrédients de la recette
             for (let i in ingredients) {
                 let ingredient = ingredients[i]["ingredient"].toLowerCase()
                 if (ingredient.search(regex_search) != -1) {
-                    sorted_recipes.push(recipes[element])
-                    continue
+                    correspondence ++
                 }
             }
+            // ajoute la recette à la liste correspondant au niveau de correspondance dans de la recherche principale
+            if (correspondence == 1) {
+                sorted_recipes_lvl_1.push(recipes[element])
+            }
+            else if (correspondence == 2) {
+                sorted_recipes_lvl_2.push(recipes[element])
+            }
+            else if (correspondence == 3) {
+                sorted_recipes_lvl_3.push(recipes[element])
+            }
+            else if (correspondence > 3) {
+                sorted_recipes_lvl_4.push(recipes[element])
+            }
+            else {
+                continue
+            }
+        }
+        for (let element in sorted_recipes_lvl_4) {
+            sorted_recipes.push(sorted_recipes_lvl_4[element])
+        }
+        for (let element in sorted_recipes_lvl_3) {
+            sorted_recipes.push(sorted_recipes_lvl_3[element])
+        }
+        for (let element in sorted_recipes_lvl_2) {
+            sorted_recipes.push(sorted_recipes_lvl_2[element])
+        }
+        for (let element in sorted_recipes_lvl_1) {
+            sorted_recipes.push(sorted_recipes_lvl_1[element])
         }
         // supprime l'alert si déjà présente pour éviter les doublons ou en cas de recherche valide
         try {
