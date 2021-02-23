@@ -287,7 +287,6 @@ export default class TagsToolbox {
                 close_tag[element].addEventListener("click", () => {
                     tag[element].remove()
                     RecipesToolbox.sortRecipeAfterTag(recipes)
-                    // TODO: add commentaire
                     const search_value = document.getElementById("search_bar").value
                     RecipesToolbox.sortRecipe(recipes, search_value)
                 })
