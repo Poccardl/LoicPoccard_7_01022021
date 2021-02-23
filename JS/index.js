@@ -25,7 +25,7 @@ function fetchData() {
 function scenario(recipes) {
     /* Lance la suite d'évènement nécessaire au déroulement de l'application */
     RecipesToolbox.insertAllRecipes(recipes)
-    TagsToolbox.getAllTags(recipes)
+    TagsToolbox.getTags(recipes["recipes"])
     TagsToolbox.clickOnAllTags(recipes["recipes"])
 
     window.regex_tags = RegExp(">(...{0,})<")
