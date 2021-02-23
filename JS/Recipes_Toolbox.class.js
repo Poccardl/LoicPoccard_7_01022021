@@ -109,10 +109,10 @@ export default class RecipesToolbox {
         /* Tri les recettes en fonction de la recherche de l'utilisateur et du nombre de correspondance pour avoir une recherche plus précise */
         const regex_search = RegExp(`(\\b${search_value})`)
         let sorted_recipes = []
-        let sorted_recipes_lvl_1 = []
-        let sorted_recipes_lvl_2 = []
-        let sorted_recipes_lvl_3 = []
-        let sorted_recipes_lvl_4 = []
+        let correspondence_lvl_1 = []
+        let correspondence_lvl_2 = []
+        let correspondence_lvl_3 = []
+        let correspondence_lvl_4 = []
         for (let element in recipes) {
             let correspondence = 0
             let name = recipes[element]["name"].toLowerCase()
@@ -135,32 +135,32 @@ export default class RecipesToolbox {
             }
             // ajoute la recette à la liste correspondant au niveau de correspondance dans de la recherche principale
             if (correspondence == 1) {
-                sorted_recipes_lvl_1.push(recipes[element])
+                correspondence_lvl_1.push(recipes[element])
             }
             else if (correspondence == 2) {
-                sorted_recipes_lvl_2.push(recipes[element])
+                correspondence_lvl_2.push(recipes[element])
             }
             else if (correspondence == 3) {
-                sorted_recipes_lvl_3.push(recipes[element])
+                correspondence_lvl_3.push(recipes[element])
             }
             else if (correspondence > 3) {
-                sorted_recipes_lvl_4.push(recipes[element])
+                correspondence_lvl_4.push(recipes[element])
             }
             else {
                 continue
             }
         }
-        for (let element in sorted_recipes_lvl_4) {
-            sorted_recipes.push(sorted_recipes_lvl_4[element])
+        for (let element in correspondence_lvl_4) {
+            sorted_recipes.push(correspondence_lvl_4[element])
         }
-        for (let element in sorted_recipes_lvl_3) {
-            sorted_recipes.push(sorted_recipes_lvl_3[element])
+        for (let element in correspondence_lvl_3) {
+            sorted_recipes.push(correspondence_lvl_3[element])
         }
-        for (let element in sorted_recipes_lvl_2) {
-            sorted_recipes.push(sorted_recipes_lvl_2[element])
+        for (let element in correspondence_lvl_2) {
+            sorted_recipes.push(correspondence_lvl_2[element])
         }
-        for (let element in sorted_recipes_lvl_1) {
-            sorted_recipes.push(sorted_recipes_lvl_1[element])
+        for (let element in correspondence_lvl_1) {
+            sorted_recipes.push(correspondence_lvl_1[element])
         }
         // supprime l'alert si déjà présente pour éviter les doublons ou en cas de recherche valide
         try {
