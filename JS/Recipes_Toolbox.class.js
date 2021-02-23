@@ -115,19 +115,19 @@ export default class RecipesToolbox {
             let description = recipes[element]["description"].toLowerCase()
             let ingredients = recipes[element]["ingredients"]
             // cherche si on a une correspondance dans le titre de la recette
-            if (regex_search.exec(name)) {
+            if (name.search(regex_search) != -1) {
                 sorted_recipes.push(recipes[element])
                 continue
             }
             // cherche si on a une correspondance dans la description de la recette
-            if (regex_search.exec(description)) {
+            if (description.search(regex_search) != -1) {
                 sorted_recipes.push(recipes[element])
                 continue
             }
             // cherche si on a une correspondance dans les ingrédients de la recette
             for (let i in ingredients) {
                 let ingredient = ingredients[i]["ingredient"].toLowerCase()
-                if (regex_search.exec(ingredient)) {
+                if (ingredient.search(regex_search) != -1) {
                     sorted_recipes.push(recipes[element])
                     continue
                 }
