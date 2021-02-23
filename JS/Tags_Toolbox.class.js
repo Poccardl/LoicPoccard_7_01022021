@@ -3,42 +3,6 @@ import RecipesToolbox from "./Recipes_Toolbox.class.js"
 
 export default class TagsToolbox {
 
-    static getAllTags(recipes) {
-        /* Récupère tous les tags disponibles lors de la première initialisation de l'application */
-        let data = recipes["recipes"]
-        let appliance_tags = []
-        let ingredient_tags = []
-        let ustensils_tags = []
-        for (let element in data) {
-            // récupère les tags de type appliance
-            if (appliance_tags.includes(data[element].appliance)) {
-                continue
-            }
-            else {
-                appliance_tags.push(data[element].appliance)
-            }
-            // récupère les tags de type ingredient
-            for (let i in data[element].ingredients) {
-                if (ingredient_tags.includes(data[element].ingredients[i].ingredient)) {
-                    continue
-                }
-                else {
-                    ingredient_tags.push(data[element].ingredients[i].ingredient)
-                }
-            }
-            // récupère les tags de type ustensil
-            for (let a in data[element].ustensils) {
-                if (ustensils_tags.includes(data[element].ustensils[a])) {
-                    continue
-                }
-                else {
-                    ustensils_tags.push(data[element].ustensils[a])
-                }
-            }
-        }
-        this.insertTags(appliance_tags, ingredient_tags, ustensils_tags)
-    }
-
     static getTags(sorted_recipes) {
         /* Récupère la totalité des tags de l'application en fonction de la recherche principale, par tags */
         let appliance_tags = []
@@ -201,7 +165,7 @@ export default class TagsToolbox {
     }
 
     static removeCurrentTags(node) {
-        /* Supprime les tags actuelles en fonction d'un type donner */
+        /* Supprime les tags actuelles en fonction d'un type donné */
         const tags_li = document.querySelectorAll(`#${node} li`)
         for (let element in tags_li) {
             try {
@@ -323,7 +287,6 @@ export default class TagsToolbox {
                 close_tag[element].addEventListener("click", () => {
                     tag[element].remove()
                     RecipesToolbox.sortRecipeAfterTag(recipes)
-                    // TODO: add commentaire
                     const search_value = document.getElementById("search_bar").value
                     RecipesToolbox.sortRecipe(recipes, search_value)
                 })

@@ -89,7 +89,6 @@ export default class RecipesToolbox {
                     continue
                 }
                 recipe_ingredients_html += `</li>`
-
             }
             recipe_card_html += `${recipe_ingredients_html}
             </ul>
@@ -136,6 +135,7 @@ export default class RecipesToolbox {
         // supprime l'alert si déjà présente pour éviter les doublons ou en cas de recherche valide
         try {
             const recipe_alert = document.querySelector("#recipes_section .row .alert")
+            // supprime l'alert si existante
             recipe_alert.remove()
         }
         catch {
