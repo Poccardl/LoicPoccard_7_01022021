@@ -109,10 +109,6 @@ export default class RecipesToolbox {
         /* Tri les recettes en fonction de la recherche de l'utilisateur et du nombre de correspondance pour avoir une recherche plus précise */
         const regex_search = RegExp(`(\\b${search_value})`)
         let sorted_recipes = []
-        let correspondence_lvl_1 = []
-        let correspondence_lvl_2 = []
-        let correspondence_lvl_3 = []
-        let correspondence_lvl_4 = []
         for (let element in recipes) {
             let correspondence = 0
             let name = recipes[element]["name"].toLowerCase()
@@ -133,35 +129,13 @@ export default class RecipesToolbox {
                     correspondence ++
                 }
             }
-            // ajoute la recette à la liste correspondant au niveau de correspondance dans de la recherche principale
-            if (correspondence == 1) {
-                correspondence_lvl_1.push(recipes[element])
-            }
-            else if (correspondence == 2) {
-                correspondence_lvl_2.push(recipes[element])
-            }
-            else if (correspondence == 3) {
-                correspondence_lvl_3.push(recipes[element])
-            }
-            else if (correspondence > 3) {
-                correspondence_lvl_4.push(recipes[element])
-            }
-            else {
-                continue
+            let recipe = {...recipes[element]}
+            recipe.countSearch = correspondence
+            if(correspondence > 0) {
+                sorted_recipes.push(recipe)
             }
         }
-        for (let element in correspondence_lvl_4) {
-            sorted_recipes.push(correspondence_lvl_4[element])
-        }
-        for (let element in correspondence_lvl_3) {
-            sorted_recipes.push(correspondence_lvl_3[element])
-        }
-        for (let element in correspondence_lvl_2) {
-            sorted_recipes.push(correspondence_lvl_2[element])
-        }
-        for (let element in correspondence_lvl_1) {
-            sorted_recipes.push(correspondence_lvl_1[element])
-        }
+        sorted_recipes.sort((a,b) => {return  b.countSearch - a.countSearch})
         // supprime l'alert si déjà présente pour éviter les doublons ou en cas de recherche valide
         try {
             const recipe_alert = document.querySelector("#recipes_section .row .alert")
