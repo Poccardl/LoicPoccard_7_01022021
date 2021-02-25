@@ -3,8 +3,10 @@
         border-radius: 0px 5px 5px 0px!important;
     }
     ul {
-        margin-top: -4px;
+        margin-top: 32px;
         margin-left: 0px!important;
+        position: absolute;
+        z-index: 1;
     }
 }
 #ingredients {
